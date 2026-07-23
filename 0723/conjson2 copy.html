@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="teams">
+      <ul>
+        <li id="samsung"></li>
+        <li id="kt"></li>
+        <li id="lg"></li>
+        <li id="kia"></li>
+        <li id="san"></li>
+        <li id="han"></li>
+        <li id="nc"></li>
+        <li id="lotte"></li>
+        <li id="ssg"></li>
+        <li id="키움"></li>
+      </ul>
+    </div>
+
+    <script>
+      const jsonUrl =
+        "https://prof-jwchi.github.io/kopo-front2026/Json/baseball.json";
+
+      // fetch API 로 JSON 파일 가져오기
+      fetch(jsonUrl)
+        .then((response) => {
+          // 응답을 JSON 으로 변환
+          return response.json();
+        })
+        .then((data) => {
+          // 변환된 JSON 객체 사용
+          const divLi1 = document.getElementById("samsung");
+          const divLi2 = document.getElementById("kt");
+          const divLi3 = document.getElementById("lg");
+          const divLi4 = document.getElementById("kia");
+          const divLi5 = document.getElementById("san");
+          const divLi6 = document.getElementById("han");
+          const divLi7 = document.getElementById("nc");
+          const divLi8 = document.getElementById("lotte");
+          const divLi9 = document.getElementById("ssg");
+          const divLi10 = document.getElementById("키움");
+          divLi1.innerHTML = `${data.list[0].rank.rank} ${data.list[0].shortName} ${data.list[0].rank.game} ${data.list[0].rank.win} ${data.list[0].rank.draw} ${data.list[0].rank.loss} ${data.list[0].rank.wpct} ${data.list[0].rank.gb} ${data.list[0].rank.streak}`;
+          divLi2.innerHTML = `${data.list[1].rank.rank} ${data.list[1].shortName} ${data.list[1].rank.game} ${data.list[1].rank.win} ${data.list[1].rank.draw} ${data.list[1].rank.loss} ${data.list[1].rank.wpct} ${data.list[1].rank.gb} ${data.list[1].rank.streak}`;
+          divLi3.innerHTML = `${data.list[2].rank.rank} ${data.list[2].shortName} ${data.list[2].rank.game} ${data.list[2].rank.win} ${data.list[2].rank.draw} ${data.list[2].rank.loss} ${data.list[2].rank.wpct} ${data.list[2].rank.gb} ${data.list[2].rank.streak}`;
+          divLi4.innerHTML = `${data.list[3].rank.rank} ${data.list[3].shortName} ${data.list[3].rank.game} ${data.list[3].rank.win} ${data.list[3].rank.draw} ${data.list[3].rank.loss} ${data.list[3].rank.wpct} ${data.list[3].rank.gb} ${data.list[3].rank.streak}`;
+          divLi5.innerHTML = `${data.list[4].rank.rank} ${data.list[4].shortName} ${data.list[4].rank.game} ${data.list[4].rank.win} ${data.list[4].rank.draw} ${data.list[4].rank.loss} ${data.list[4].rank.wpct} ${data.list[4].rank.gb} ${data.list[4].rank.streak}`;
+          divLi6.innerHTML = `${data.list[5].rank.rank} ${data.list[5].shortName} ${data.list[5].rank.game} ${data.list[5].rank.win} ${data.list[5].rank.draw} ${data.list[5].rank.loss} ${data.list[5].rank.wpct} ${data.list[5].rank.gb} ${data.list[5].rank.streak}`;
+          divLi7.innerHTML = `${data.list[6].rank.rank} ${data.list[6].shortName} ${data.list[6].rank.game} ${data.list[6].rank.win} ${data.list[6].rank.draw} ${data.list[6].rank.loss} ${data.list[6].rank.wpct} ${data.list[6].rank.gb} ${data.list[6].rank.streak}`;
+          divLi8.innerHTML = `${data.list[7].rank.rank} ${data.list[7].shortName} ${data.list[7].rank.game} ${data.list[7].rank.win} ${data.list[7].rank.draw} ${data.list[7].rank.loss} ${data.list[7].rank.wpct} ${data.list[7].rank.gb} ${data.list[7].rank.streak}`;
+          divLi9.innerHTML = `${data.list[8].rank.rank} ${data.list[8].shortName} ${data.list[8].rank.game} ${data.list[8].rank.win} ${data.list[8].rank.draw} ${data.list[8].rank.loss} ${data.list[8].rank.wpct} ${data.list[8].rank.gb} ${data.list[8].rank.streak}`;
+          divLi10.innerHTML = `${data.list[9].rank.rank} ${data.list[9].shortName} ${data.list[9].rank.game} ${data.list[9].rank.win} ${data.list[9].rank.draw} ${data.list[9].rank.loss} ${data.list[9].rank.wpct} ${data.list[9].rank.gb} ${data.list[9].rank.streak}`;
+        })
+        .catch((error) => {
+          // 오류 처리
+          console.error("JSON 파일을 가져오는 데 실패했습니다.", error);
+        });
+    </script>
+  </body>
+</html>

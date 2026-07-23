@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KBO 순위표</title>
+    <style>
+      /* 전체 폰트 및 기본 설정 */
+      body {
+        font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        color: #333;
+      }
+
+      /* 표 컨테이너 */
+      .table-container {
+        max-width: 1000px;
+        margin: 20px auto;
+      }
+
+      /* 테이블 기본 스타일 */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+      }
+
+      /* 테이블 헤더(thead) 스타일 */
+      thead th {
+        border-top: 1px solid #333;
+        border-bottom: 1px solid #e0e0e0;
+        padding: 15px 10px;
+        font-size: 14px;
+        font-weight: normal;
+        color: #666;
+      }
+
+      /* 테이블 본문(tbody) 스타일 */
+      tbody td {
+        padding: 15px 10px;
+        border-bottom: 1px solid #e0e0e0;
+        font-size: 15px;
+        vertical-align: middle;
+      }
+
+      /* 순위 숫자 굵게 */
+      .rank-num {
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      /* 팀 이름 영역 (좌측 정렬) */
+      .team-col {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+
+      .team-col img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+      }
+
+      .team-col .arrow {
+        color: #999;
+        font-size: 12px;
+        margin-left: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>순위</th>
+            <th style="text-align: left">팀</th>
+            <th>경기</th>
+            <th>승</th>
+            <th>무</th>
+            <th>패</th>
+            <th class="wpct-col">승률</th>
+            <th>게임차</th>
+            <th>연속</th>
+          </tr>
+        </thead>
+        <!-- 자바스크립트로 데이터가 삽입될 영역 -->
+        <tbody id="team-standings"></tbody>
+      </table>
+    </div>
+
+    <script>
+      const jsonUrl =
+        "https://prof-jwchi.github.io/kopo-front2026/Json/baseball.json";
+
+      // fetch API로 JSON 파일 가져오기
+      fetch(jsonUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          const tbody = document.getElementById("team-standings");
+
+          // data.list 배열을 반복문(forEach)으로 돌면서 행(tr)을 생성합니다.
+          data.list.forEach((team) => {
+            // 로고 이미지가 JSON에 없다면 기본 빈 이미지나 팀명 이니셜로 대체할 수 있습니다.
+            // 여기서는 임시 투명 이미지를 넣었습니다. 실제 로고 URL이 있다면 대체하세요.
+            const logoHtml = `<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="logo" style="background-color:#ccc; border-radius:50%;">`;
+
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td class="rank-num">${team.rank.rank}</td>
+              <td>
+                <div class="team-col">
+                  ${logoHtml} 
+                  ${team.shortName} <span class="arrow">&gt;</span>
+                </div>
+              </td>
+              <td>${team.rank.game}</td>
+              <td>${team.rank.win}</td>
+              <td>${team.rank.draw}</td>
+              <td>${team.rank.loss}</td>
+              <td class="wpct-col">${team.rank.wpct}</td>
+              <td>${team.rank.gb}</td>
+              <td>${team.rank.streak}</td>
+            `;
+            tbody.appendChild(tr);
+          });
+        })
+        .catch((error) => {
+          console.error("JSON 파일을 가져오는 데 실패했습니다.", error);
+        });
+    </script>
+  </body>
+</html>
